@@ -41,14 +41,9 @@
 <script>
 export default {
   name: 'home',
-  data () {
-    return {
-      meetups: [
-        { imageUrl: 'https://unsplash.it/1440/500?image=25', id: '111', title: '[PH]' },
-        { imageUrl: 'https://unsplash.it/1440/500?image=21', id: '222', title: '[PH]' },
-        { imageUrl: 'https://unsplash.it/1440/500?image=22', id: '333', title: '[PH]' },
-        { imageUrl: 'https://unsplash.it/1440/500?image=23', id: '444', title: '[PH]' }
-      ]
+  computed: {
+    meetups () {
+      return this.$store.getters.featuredMeetups
     }
   },
   methods: {
