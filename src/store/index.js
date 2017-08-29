@@ -10,25 +10,25 @@ export const store = new Vuex.Store({
         date: '2017-07-17',
         imageUrl: 'https://unsplash.it/1440/500?image=25',
         id: '111',
-        title: '[PH]'
+        title: 'Meetup in Melbourne'
       },
       {
         date: '2017-07-17',
         imageUrl: 'https://unsplash.it/1440/500?image=21',
         id: '222',
-        title: '[PH]'
+        title: 'Meetup in Tokyo'
       },
       {
         date: '2017-07-17',
         imageUrl: 'https://unsplash.it/1440/500?image=22',
         id: '333',
-        title: '[PH]'
+        title: 'Meetup in Berlin'
       },
       {
         date: '2017-07-19',
         imageUrl: 'https://unsplash.it/1440/500?image=23',
         id: '444',
-        title: '[PH]'
+        title: 'Meetup in London'
       }
     ],
     user: {
@@ -36,17 +36,38 @@ export const store = new Vuex.Store({
       registeredMeetups: ['asgaddsgsg']
     }
   },
-  mutations: {},
-  actions: {},
+
+  mutations: {
+    createMeetup (state, payload) {
+      state.loadedMeetups.push(payload)
+    }
+  },
+
+  actions: {
+    createMeetup ({commit}, payload) {
+      const meetup = {
+        date: payload.date,
+        description: payload.description,
+        location: payload.location,
+        imageUrl: payload.imageUrl,
+        title: payload.title
+      }
+      // Reach out to Firebase
+      commit('createMeetup', meetup)
+    }
+  },
+
   getters: {
     loadedMeetups (state) {
       return state.loadedMeetups.sort((meetupA, meetupB) => {
         return meetupA.date > meetupB.date
       })
     },
+
     featuredMeetups (state, getters) {
       return getters.loadedMeetups.slice(0, 5)
     },
+
     loadedMeetup (state) {
       return (meetupId) => {
         return state.loadedMeetups.find((meetup) => {

@@ -5,15 +5,15 @@
       v-flex(xs12)
         v-card
           v-card-title
-            h6.primary--text My Meetup
+            h6.primary--text {{ meetup.title }}
 
           v-card-media(
-            src='https://unsplash.it/1440/500?random' 
+            :src='meetup.imageUrl' 
             height='400px' 
           )
 
           v-card-text
-            .info--text 17th July 2017 - Where it takes place
+            .info--text {{ meetup.date }} - Where it takes place
             | Lorem ipsum
 
           v-card-actions
@@ -24,10 +24,16 @@
 
 <script>
 export default {
+  props: ['id'],
   name: 'meetup',
   data () {
     return {
 
+    }
+  },
+  computed: {
+    meetup () {
+      return this.$store.getters.loadedMeetup(this.id)
     }
   }
 }
