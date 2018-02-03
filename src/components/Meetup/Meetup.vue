@@ -13,8 +13,8 @@
           )
 
           v-card-text
-            .info--text {{ meetup.date }} - Where it takes place
-            | Lorem ipsum
+            .info--text.mb-1 {{ meetup.date | date }} — {{ meetup.location }}
+            p {{ meetup.description }}
 
           v-card-actions
             v-spacer

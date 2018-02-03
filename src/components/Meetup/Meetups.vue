@@ -15,9 +15,9 @@
 
               v-flex(xs7 sm8 md9)
                 v-card-title(primary-title)
-                  .div
-                    h5.white--text.mb-0 {{ meetup.title }}
-                    p {{ meetup.date }}
+                  div
+                    h5.white--text.mb-1 {{ meetup.title }}
+                    p {{ meetup.date | date }}
                 
                 v-card-actions
                   v-btn(flat :to='"/meetups/" + meetup.id') 

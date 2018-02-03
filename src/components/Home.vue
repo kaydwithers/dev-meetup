@@ -1,51 +1,43 @@
-<template>
-  <div class="home">
-    <v-container>
+<template lang="pug">
+  .home
+    v-container
 
-      <v-layout row wrap class="mb-4">
-        <v-flex xs12 sm6 class="text-xs-center text-sm-right">
-          <v-btn info large router to="/meetups">Explore Meetups</v-btn>
-        </v-flex>
-        <v-flex xs12 sm6 class="text-xs-center text-sm-left">
-          <v-btn info large router to="/meetup/new">Organise Meetup</v-btn>
-        </v-flex>
-      </v-layout>
+      v-layout.mb-4(row wrap)
+        v-flex.text-xs-center.text-sm-right(xs12 sm6)
+          v-btn(info large router to='/meetups') Explore Meetups
 
-      <v-layout row wrap class="mb-4">
-        <v-flex xs12>
-          <v-carousel icon="stop">
-            <v-carousel-item
-              @click="onLoadMeetup(meetup.id)" 
-              v-for="meetup in meetups"
-              :key="meetup.id"
-              :src="meetup.imageUrl"
-              transition="fade"
-              reverseTransition="fade"
-            >
-              <div class="title">{{ meetup.title }}</div>
-            </v-carousel-item>
-          </v-carousel>
-        </v-flex>
-      </v-layout>
+        v-flex.text-xs-center.text-sm-left(xs12 sm6)
+          v-btn(info large router to='/meetup/new') Organise Meetup
 
-      <v-layout row wrap class="mb-4">
-        <v-flex xs12 class="text-xs-center">
-          <p>Join our awesome meetups.</p>
-        </v-flex>
-      </v-layout>
+      v-layout.mb-4(row wrap)
+        v-flex(xs12)
+          v-carousel(icon='stop')
+            v-carousel-item(
+              @click='onLoadMeetup(meetup.id)' 
+              v-for='meetup in meetups'
+              :key='meetup.id'
+              :src='meetup.imageUrl'
+              transition='fade'
+              reverseTransition='fade'
+            )
+              .title {{ meetup.title }}
 
-    </v-container>
-  </div>
+      v-layout.mb-4(row wrap)
+        v-flex.text-xs-center(xs12)
+          p Join our awesome meetups.
+
 </template>
 
 <script>
 export default {
   name: 'home',
+
   computed: {
     meetups () {
       return this.$store.getters.featuredMeetups
     }
   },
+
   methods: {
     onLoadMeetup (id) {
       this.$router.push('/meetups/' + id)
